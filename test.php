@@ -1,3 +1,3 @@
 <?php
-echo "Hallo";
-?>
+define("GESTERN", 1);
+$heute = "jetzt";
