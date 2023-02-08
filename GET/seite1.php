@@ -1,4 +1,7 @@
 <?php
+include("todo.php");
+?>
+<?php
 
 #Todo print all $_GET Variables
 

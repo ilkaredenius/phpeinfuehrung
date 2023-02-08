@@ -10,6 +10,8 @@ Kommentar:<br>
 <textarea name="kommentar" cols="30" rows="5">
 </textarea>
  
+<input type="hidden" name="versteckt" value="hierso">
+
 <input type="Submit" value="Absenden">
 </form>
 </body>
