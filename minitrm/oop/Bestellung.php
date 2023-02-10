@@ -48,7 +48,6 @@ class Bestellung {
     public function load($id, $mysqli)
     {
         $sql = "SELECT * FROM bestellungen WHERE personen_id = " . $id;
-        echo $sql;
         $result = $mysqli->query($sql);
         while ($row = $result->fetch_row()) {
             $this->id = $row[0];
@@ -65,8 +64,8 @@ class Bestellung {
 
     public function insertBestellung($mysqli) {
         $sql = "INSERT INTO bestellungen (personen_id, bestellung)" .
-            " VALUES (" . $this->getPersonen_id() . ", " . $this->getBestellung() . ")";
-        $mysqli->query($sql);
+            " VALUES (" . $_POST['person'] . ", '" . $_POST['bestellung'] . "')";
 
+        $mysqli->query($sql);
     }
 }

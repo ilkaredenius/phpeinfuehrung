@@ -60,7 +60,6 @@ class Person {
     public function load($id, $mysqli)
     {
         $sql = "SELECT * FROM personen WHERE personen.id = " . $id;
-        echo $sql;
         $result = $mysqli->query($sql);
         while ($row = $result->fetch_row()) {
             $this->id = $row[0];
@@ -75,5 +74,12 @@ class Person {
             `nachname` = '" . $this->getNachname() . "'
             WHERE id = " . $this->getId();
         $mysqli->query($sql);
+    }
+
+    public function insertPerson($mysqli) {
+        $sql = "INSERT INTO personen (vorname, nachname)
+            VALUES ('" . $this->getVorname() . "', '" . $this->getNachname() . "')";
+        $mysqli->query($sql);
+
     }
 }
