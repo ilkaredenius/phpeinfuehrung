@@ -1,0 +1,5 @@
+<?php
+include("datenbank.php");
+
+$sql = "DELETE FROM `personen` WHERE id = " . $_POST['id'];
+$mysqli->query($sql);
