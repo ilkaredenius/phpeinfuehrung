@@ -9,12 +9,8 @@ $result = $mysqli->query($sql);
 if (isset($_POST["neuebestellung"])) {
     echo "ja";
     $bestellung = new Bestellung();
-//    $bestellung->getBestellung();
-    $sql = "INSERT INTO bestellungen (personen_id, bestellung)" .
-            " VALUES (" . $bestellung->getPersonen_id() . ", " . $bestellung->getBestellung() . ")";
-    $mysqli->query($sql);
-    echo $sql;
-//    $bestellung->insertBestellung($mysqli);
+    $bestellung->getBestellung();
+    $bestellung->insertBestellung($mysqli);
 
 }
 ?>
