@@ -24,7 +24,7 @@ if (isset($_POST["neueperson"])) {
             </h2>
         </div>
         <div>
-            <a href="liste.php">zur&uuml;ck</a>
+            <a href="index.php">zur&uuml;ck</a>
         </div>
 <?php
 } else {

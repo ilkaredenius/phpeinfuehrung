@@ -1,12 +1,18 @@
 <?php
 include("../mysql/datenbank.php");
+include("../oop/Person.php");
+include("../oop/Bestellung.php");
 
-if ($_GET['id'] != "") {
-    $sql = "DELETE FROM bestellungen WHERE id = " . $_GET['id'];
-    $result = $mysqli->query($sql);
+$bid = $_GET['id'];
+$pid = $_GET['pers'];
+
+if ($bid != "") {
+    $bestellung1 = new Bestellung();
+    $bestellung1->delete($id, $mysqli);
+
 } else {
-    $sql = "DELETE FROM personen WHERE id = " . $_GET['pers'];
-    $result = $mysqli->query($sql);
+    $person1 = new Person();
+    $person1->delete($pers, $mysqli);
 }
 ?><!DOCTYPE html>
 <html>
@@ -16,6 +22,9 @@ if ($_GET['id'] != "") {
     <body>
         <div id="ueberschrift">
             Der Datensatz wurde gel&ouml;scht.
+        </div>
+        <div>
+            <a href="index.php">zur&uuml;ck</a>
         </div>
     </body>
 </html>

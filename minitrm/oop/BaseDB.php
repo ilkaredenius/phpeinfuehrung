@@ -1,7 +1,5 @@
 <?php
 abstract class BaseDB {
-    public $mysqli;
-
     public function getConnect() {
         $mysqli = new mysqli("localhost", "root", "", "minitrm");
         $mysqli->select_db("minitrm");
@@ -19,46 +17,71 @@ abstract class BaseDB {
         $sql = "SELECT * FROM " . $table . " " . $options;
         $result = $this->getConnect()->query($sql);
         while ($row = $result->fetch_object($this->getSource())) {
-//            print_r($row);
             $arr_collection[] = $row;
         }
         return $arr_collection;
     }
     public function findFirst($id) {
-
         $model = new static();
 
         $options = "WHERE id = " . $id . " LIMIT 1";
         $table = $model->getSource();
 
         $sql = "SELECT * FROM " . $table . " " . $options;
+
         $result = $model->getConnect()->query($sql);
-        $row = $result->fetch_object($table);
-        return $row;
+        while ($row = $result->fetch_object($this->getSource())) {
+            return $row;
+        }
     }
 
     public function save() {
-        $table = $this->getSource();
+        $model = new static();
+        $table = $model->getSource();
+        $nameneu = "";
+        $valueneu = "";
+        $namevalue = "";
 
-        $sql = "UPDATE " . $table . "SET 
-            VALUES (SPALTENWERTE)";
+        foreach($this as $name=>$value) {
+            if ($name == "id" && !isset($value)) {
+                $mod = "insert";
+
+                $nameneu .= $name . ", ";
+                $valueneu .= "'" . $value . "', ";
+            } else {
+                $mod = "";
+                if ($name != "id") {
+                    $namevalue .= $name . " = '" . $value . "', ";
+                } else {
+                    $id = $value;
+                }
+            }
+            var_dump($value);
+        }
+        $neuname = substr($nameneu, 0, -2);
+        $neuvalue = substr($valueneu, 0, -2);
+        $neunamevalue = substr($namevalue, 0, -2);
+
+
+        if ($mod == "insert") {
+            $sql = "INSERT INTO " . $table . "(" . $neuname . ")
+                VALUES ('" . $neuvalue . "')";echo $sql;
+
+        } else {
+            $sql = "UPDATE "  .$table .
+                    " SET " . $neunamevalue .
+                    " WHERE id = " . $id;
+        }echo $sql;
+//        $result = $model->getConnect()->query($sql);
     }
 
+    public function delete($id) {
+        $model = new static();
+        $table = $model->getSource();
 
-
-    //insert
-    /*$sql = "INSERT INTO personen (vorname, nachname)
-            VALUES ('" . $this->getVorname() . "', '" . $this->getNachname() . "')";*/
-
-    //update und save
-    /*$sql = "UPDATE `personen`
-            SET `vorname` = '" . $this->getVorname() . "', 
-            `nachname` = '" . $this->getNachname() . "'
-            WHERE id = " . $this->getId();*/
-
-    //delete
-    //$sql = "DELETE FROM personen WHERE id = " . $id;
-
+        $sql = "DELETE FROM " . $table . " WHERE id = " . $id;
+        $result = $model->getConnect()->query($sql);
+    }
 
     abstract public function getSource();
 }

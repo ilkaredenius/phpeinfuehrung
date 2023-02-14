@@ -55,6 +55,16 @@ class Bestellung {
         }
     }
 
+    public function loadBestellung($mysqli, $best) {
+        $sql = "SELECT * FROM bestellungen
+             WHERE id = " . $best;
+        $result = $mysqli->query($sql);
+        while ($row = $result->fetch_row()) {
+            $this->id = $row[0];
+            $this->bestellung = $row[2];
+        }
+    }
+
     public function save($mysqli) {
         $sql = "UPDATE `bestellungen`
             SET `bestellung` = '" . $this->getBestellung() . "'
@@ -66,6 +76,11 @@ class Bestellung {
         $sql = "INSERT INTO bestellungen (personen_id, bestellung)" .
             " VALUES (" . $_POST['person'] . ", '" . $_POST['bestellung'] . "')";
 
+        $mysqli->query($sql);
+    }
+
+    public function delete($mysqli, $id) {
+        $sql = "DELETE FROM bestellungen WHERE id = " . $id;
         $mysqli->query($sql);
     }
 }

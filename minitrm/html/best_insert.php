@@ -3,8 +3,8 @@ include("../mysql/datenbank.php");
 include("../oop/Person.php");
 include("../oop/Bestellung.php");
 
-$sql = "SELECT * FROM personen order by nachname, vorname";
-$result = $mysqli->query($sql);
+$personen = new Person();
+$person = $personen->loadPersonen($mysqli);
 
 if (isset($_POST["neuebestellung"])) {
     $bestellung = new Bestellung();
@@ -29,7 +29,7 @@ if (isset($_POST["neuebestellung"])) {
             </h2>
         </div>
         <div>
-            <a href="liste.php">zur&uuml;ck</a>
+            <a href="index.php">zur&uuml;ck</a>
         </div>
 <?php
 } else {
@@ -48,9 +48,9 @@ if (isset($_POST["neuebestellung"])) {
                 <select name="person">
                     <option>bitte ausw&auml;hlen</option>
 <?php
-while ($person = mysqli_fetch_assoc($result)) {
+foreach ($person AS $person1) {
 ?>
-                    <option value="<?php echo $person['id']; ?>"><?php echo $person['vorname'] . " " . $person['nachname']; ?></option>
+                    <option value="<?php echo $person1['0']; ?>"><?php echo $person1['1'] . " " . $person1['2']; ?></option>
 <?php
 }
 ?>

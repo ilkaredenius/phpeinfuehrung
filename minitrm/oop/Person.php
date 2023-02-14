@@ -57,8 +57,7 @@ class Person {
         return $this->id;
     }
 
-    public function load($id, $mysqli)
-    {
+    public function load($id, $mysqli) {
         $sql = "SELECT * FROM personen WHERE personen.id = " . $id;
         $result = $mysqli->query($sql);
         while ($row = $result->fetch_row()) {
@@ -66,6 +65,25 @@ class Person {
             $this->setVorname($row[1]);
             $this->setNachname($row[2]);
         }
+    }
+
+    public function loadPersonen($mysqli) {
+        $sql = "SELECT * FROM personen order by nachname, vorname";
+        $result = $mysqli->query($sql);
+        while ($row = $result->fetch_row()) {
+            $arr[] = $row;
+        }
+        return $arr;
+    }
+
+    public function get_personen($mysqli) { 
+        $sql = "SELECT vorname, nachname, bestellung, bestellungen.id AS best_id, personen.id AS pers_id FROM personen LEFT JOIN bestellungen
+        ON personen.id = bestellungen.personen_id";
+        $result = $mysqli->query($sql);
+        while ($row = $result->fetch_row()) {
+            $arr[] = $row;
+        }
+        return $arr;
     }
 
     public function save($mysqli) {
@@ -80,6 +98,10 @@ class Person {
         $sql = "INSERT INTO personen (vorname, nachname)
             VALUES ('" . $this->getVorname() . "', '" . $this->getNachname() . "')";
         $mysqli->query($sql);
+    }
 
+    public function delete($mysqli, $id) {
+        $sql = "DELETE FROM personen WHERE id = " . $id;
+        $mysqli->query($sql);
     }
 }

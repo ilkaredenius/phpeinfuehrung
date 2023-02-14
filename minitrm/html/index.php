@@ -1,9 +1,7 @@
 <?php
 include("../mysql/datenbank.php");
-
-$sql = "SELECT *, bestellungen.id AS best_id, personen.id AS pers_id FROM personen LEFT JOIN bestellungen
-         ON personen.id = bestellungen.personen_id";
-$result = $mysqli->query($sql);
+include("../oop/Person.php");
+include("../oop/Bestellung.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,13 +22,18 @@ $result = $mysqli->query($sql);
                     <td>Bestellung</td>
                 </tr>
 <?php
-while ($liste = mysqli_fetch_assoc($result)) {
+$liste = new Person();
+
+$personen = $liste->get_personen($mysqli);
+
+foreach ($personen AS $person) {
 ?>
                 <tr>
-                    <td><?php echo $liste['vorname'] ?></td>
-                    <td><?php echo $liste['nachname'] ?></td>
-                    <td><?php echo $liste['bestellung'] ?></td>
-                    <td><a href="delete.php?pers=<?php echo $liste['pers_id']; ?>&id=<?php echo $liste['best_id'] ?>">l&ouml;schen</a>
+                    <td><?php echo $person['0']; ?></td>
+                    <td><?php echo $person['1']; ?></td>
+                    <td><?php echo $person['2']; ?></td>
+                    <td><a href="update.php?pers=<?php echo $person['4']; ?>&id=<?php echo $person['3']; ?>">bearbeiten</td>
+                    <td><a href="delete.php?pers=<?php echo $person['4']; ?>&id=<?php echo $person['3']; ?>">l&ouml;schen</a>
                 </tr>
 <?php
 }
