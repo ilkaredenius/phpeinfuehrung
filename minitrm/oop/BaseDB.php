@@ -25,12 +25,15 @@ abstract class BaseDB {
         return $arr_collection;
     }
     public function findFirst($id) {
+
+        $model = new static();
+
         $options = "WHERE id = " . $id . " LIMIT 1";
-        $table = $this->getSource();
+        $table = $model->getSource();
 
         $sql = "SELECT * FROM " . $table . " " . $options;
-        $result = $this->getConnect()->query($sql);
-        $row = $result->fetch_object($this->getSource());
+        $result = $model->getConnect()->query($sql);
+        $row = $result->fetch_object($table);
         return $row;
     }
 
