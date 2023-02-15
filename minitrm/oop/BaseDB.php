@@ -42,37 +42,37 @@ abstract class BaseDB {
         $valueneu = "";
         $namevalue = "";
 
-        foreach($this as $name=>$value) {
+        foreach($this as $name=>$value) {echo $name . "--" . $value;
             if ($name == "id" && !isset($value)) {
                 $mod = "insert";
 
                 $nameneu .= $name . ", ";
                 $valueneu .= "'" . $value . "', ";
             } else {
-                $mod = "";
+                $mod = "update";
                 if ($name != "id") {
                     $namevalue .= $name . " = '" . $value . "', ";
                 } else {
                     $id = $value;
                 }
             }
-            var_dump($value);
+            var_dump($name);
         }
         $neuname = substr($nameneu, 0, -2);
         $neuvalue = substr($valueneu, 0, -2);
         $neunamevalue = substr($namevalue, 0, -2);
-
+echo"M" . $mod;
 
         if ($mod == "insert") {
             $sql = "INSERT INTO " . $table . "(" . $neuname . ")
-                VALUES ('" . $neuvalue . "')";echo $sql;
+                VALUES ('" . $neuvalue . "')";print_r($sql);
 
         } else {
             $sql = "UPDATE "  .$table .
                     " SET " . $neunamevalue .
                     " WHERE id = " . $id;
-        }echo $sql;
-//        $result = $model->getConnect()->query($sql);
+        }
+ //       $result = $model->getConnect()->query($sql);
     }
 
     public function delete($id) {

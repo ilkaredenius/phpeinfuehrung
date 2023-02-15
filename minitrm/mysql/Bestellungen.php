@@ -46,10 +46,22 @@ class Bestellungen extends BaseDB {
     {
         return $this->id;
     }
+
+    /**
+     * Set the value of personen_id
+     *
+     * @return  self
+     */ 
+    public function setPersonen_id($personen_id)
+    {
+        $this->personen_id = $personen_id;
+
+        return $this;
+    }
 }
 
 $bestellung = new Bestellungen();
-$bestellung = $bestellung->findFirst(5);
-$bestellung->personen_id = 1;
-$bestellung->bestellung = "qqqzzz";
-$bestellung->delete(1);
+$bestellung->setPersonen_id(16);
+$bestellung->setBestellung("wwww");
+$bestellung->save();
+$bestellung->debug();
