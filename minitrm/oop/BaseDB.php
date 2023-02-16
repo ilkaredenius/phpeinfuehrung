@@ -42,8 +42,14 @@ abstract class BaseDB {
         $valueneu = "";
         $namevalue = "";
 
-        foreach($this as $name=>$value) {echo $name . "--" . $value;
-            if ($name == "id" && !isset($value)) {
+        foreach($this as $name=>$value) {
+
+            if (($name == "id") && ($value===null))
+            {
+                echo "juhu";
+            }
+            
+            if (($name == "id") && ($value===null)) {
                 $mod = "insert";
 
                 $nameneu .= $name . ", ";
@@ -56,7 +62,7 @@ abstract class BaseDB {
                     $id = $value;
                 }
             }
-            var_dump($name);
+            //var_dump($name);
         }
         $neuname = substr($nameneu, 0, -2);
         $neuvalue = substr($valueneu, 0, -2);

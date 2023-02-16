@@ -1,12 +1,17 @@
 <?php
-
-class Car {
-
-public $wheels;
-
-public function getWheels()
+namespace MyApp;
+class Car 
 {
-    return $this->wheels;
-}
+
+    public $wheels;
+
+    public function __construct() {
+    }
+
+
+    public function getWheels()
+    {
+        return $this->wheels;
+    }
 
 }

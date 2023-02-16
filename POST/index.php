@@ -6,6 +6,10 @@
 E-Mail:<br>
 <input type="Text" name="email"><br><br>
  
+
+Password </br>
+<input type="password" name="password" />
+
 Kommentar:<br>
 <textarea name="kommentar" cols="30" rows="5">
 </textarea>

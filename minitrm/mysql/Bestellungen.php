@@ -60,6 +60,9 @@ class Bestellungen extends BaseDB {
     }
 }
 
+
+phpinfo();
+
 $bestellung = new Bestellungen();
 $bestellung->setPersonen_id(16);
 $bestellung->setBestellung("wwww");
