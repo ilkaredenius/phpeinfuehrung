@@ -86,7 +86,7 @@ class Person {
         return $arr;
     }
 
-    public function save($mysqli) {
+    public function save1($mysqli) {
         $sql = "UPDATE `personen`
             SET `vorname` = '" . $this->getVorname() . "', 
             `nachname` = '" . $this->getNachname() . "'

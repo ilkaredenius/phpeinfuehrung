@@ -1,14 +1,16 @@
 <?php
+namespace MyApp;
 include("../oop/BaseDB.php");
 
-class Bestellungen extends BaseDB {
+
+class Bestellung extends BaseDB {
     public $id;
     public $personen_id;
     public $bestellung;
     public function __construct() {
     }
     public function getSource() {
-        return "Bestellungen";
+        return "Bestellung";
     }
 
     /**
@@ -60,11 +62,24 @@ class Bestellungen extends BaseDB {
     }
 }
 
+$bestellung = new Bestellung();
+$bestellung->setPersonen_id(19);
+$bestellung->delete(5);
+/*
+$bestellung->delete(2);
 
-phpinfo();
+$arr = $bestellung->findFirst(2);
+var_dump($arr);
 
-$bestellung = new Bestellungen();
-$bestellung->setPersonen_id(16);
+$arr = $bestellung->find();
+//var_dump($arr);
+$obj = $arr[0];
+var_dump($obj);
+$obj->setBestellung("33333");
+$obj->save();
+
+$bestellung->setPersonen_id(19);
 $bestellung->setBestellung("wwww");
 $bestellung->save();
 $bestellung->debug();
+*/
