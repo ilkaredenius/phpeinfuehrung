@@ -7,8 +7,10 @@ class Bestellung extends BaseDB {
     public $id;
     public $personen_id;
     public $bestellung;
+
     public function __construct() {
     }
+    
     public function getSource() {
         return "Bestellung";
     }

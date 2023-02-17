@@ -9,8 +9,10 @@ class Adresse extends BaseDB {
     public $strasse;
     public $plz;
     public $ort;
+
     public function __construct() {
     }
+    
     public function getSource() {
         return "Adresse";
     }
