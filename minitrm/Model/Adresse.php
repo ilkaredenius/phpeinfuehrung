@@ -1,6 +1,6 @@
 <?php
 namespace MyApp;
-include("../oop/BaseDB.php");
+//include("../oop/BaseDB.php");
 
 
 class Adresse extends BaseDB {

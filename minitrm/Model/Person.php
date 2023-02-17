@@ -1,6 +1,8 @@
 <?php
-namespace MyApp;
-include("../oop/BaseDB.php");
+namespace MyApp\Model;
+
+//use MyApp;
+
 
 class Person extends BaseDB {
     public $id;
@@ -61,17 +63,3 @@ class Person extends BaseDB {
         return $this->id;
     }
 }
-$person = new Person();
-/*
-$person->setVorname("Marie");
-$person->setNachname("Weiler");
-$person->save();
-$person->debug();
-
-$arr = $person->find();
-
-$arr = $person->findFirst(2);
-*/
-$person->delete(16);
-
-//var_dump($arr);
