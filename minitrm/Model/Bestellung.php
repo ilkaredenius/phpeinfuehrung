@@ -1,6 +1,6 @@
 <?php
 namespace MyApp;
-include("../oop/BaseDB.php");
+//include("../oop/BaseDB.php");
 
 
 class Bestellung extends BaseDB {
@@ -63,25 +63,3 @@ class Bestellung extends BaseDB {
         return $this;
     }
 }
-
-$bestellung = new Bestellung();
-$bestellung->setPersonen_id(19);
-$bestellung->delete(5);
-/*
-$bestellung->delete(2);
-
-$arr = $bestellung->findFirst(2);
-var_dump($arr);
-
-$arr = $bestellung->find();
-//var_dump($arr);
-$obj = $arr[0];
-var_dump($obj);
-$obj->setBestellung("33333");
-$obj->save();
-
-$bestellung->setPersonen_id(19);
-$bestellung->setBestellung("wwww");
-$bestellung->save();
-$bestellung->debug();
-*/

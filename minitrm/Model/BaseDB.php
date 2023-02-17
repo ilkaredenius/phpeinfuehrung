@@ -1,5 +1,6 @@
 <?php
-namespace MyApp;
+namespace MyApp\Model;
+
 use mysqli;
 use Exception;
 
