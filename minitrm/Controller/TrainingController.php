@@ -48,7 +48,7 @@ class TrainingController
 
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $Training->delete($id);
+            $training->delete($id);
         }
     }
 }
