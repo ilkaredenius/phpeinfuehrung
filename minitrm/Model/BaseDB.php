@@ -7,13 +7,13 @@ use Exception;
 abstract class BaseDB {
     public function getConnect() {
         try {
-            $mysqli = new mysqli("localhost", "root", "", "minitrm");
+            $mysqli = new mysqli("localhost", "root", "", "training");
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
 
         try {
-            $mysqli->select_db("minitrm");
+            $mysqli->select_db("training");
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -78,8 +78,22 @@ abstract class BaseDB {
                 $id = $value;
             }
             
+            if ($name == "created_at") {
+                $nameneu .= $name . ", ";
+                $valueneu .= "'" . date("Y-m-d") . "', ";
+                continue;
+            }
+
+            if ($name == "updated_at") {
+                $nameneu .= $name . ", ";
+                $valueneu .= "'" . date("Y-m-d") . "', ";
+                $namevalue .= $name . " = '" . $value . "', ";
+                continue;
+            }
+            
             $nameneu .= $name . ", ";
             $valueneu .= "'" . $value . "', ";
+            
             $namevalue .= $name . " = '" . $value . "', ";
         }
         
