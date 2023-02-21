@@ -6,8 +6,12 @@ namespace MyApp\Model;
 
 class Person extends BaseDB {
     public $id;
-    public $vorname;
-    public $nachname;
+    public $firstname;
+    public $lastname;
+    public $email;
+    public $password;
+    public $created_at;
+    public $updated_at;
 
     public function __construct() {
     }
@@ -17,11 +21,19 @@ class Person extends BaseDB {
     }
 
     /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
      * Get the value of vorname
      */ 
     public function getVorname()
     {
-        return $this->vorname;
+        return $this->firstname;
     }
 
     /**
@@ -29,9 +41,9 @@ class Person extends BaseDB {
      *
      * @return  self
      */ 
-    public function setVorname($vorname)
+    public function setVorname($firstname)
     {
-        $this->vorname = $vorname;
+        $this->firstname = $firstname;
 
         return $this;
     }
@@ -41,7 +53,7 @@ class Person extends BaseDB {
      */ 
     public function getNachname()
     {
-        return $this->nachname;
+        return $this->lastname;
     }
 
     /**
@@ -49,18 +61,90 @@ class Person extends BaseDB {
      *
      * @return  self
      */ 
-    public function setNachname($nachname)
+    public function setNachname($lastname)
     {
-        $this->nachname = $nachname;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get the value of id
+     * Get the value of email
      */ 
-    public function getId()
+    public function getEmail()
     {
-        return $this->id;
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of created_at
+     */ 
+    public function getCreated_at()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */ 
+    public function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updated_at
+     */ 
+    public function getUpdated_at()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */ 
+    public function setUpdated_at($updated_at)
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 }

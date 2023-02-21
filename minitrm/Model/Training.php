@@ -5,7 +5,6 @@ class Training extends BaseDB {
     public $user_id;
     public $day;
     public $excercise_id;
-    public $weight;
     public $user_weight;
     public $user_scope;
     public $user_leg;
@@ -17,7 +16,7 @@ class Training extends BaseDB {
     }
     
     public function getSource() {
-        return "Excercise";
+        return "Training";
     }
 
     public function getId()
