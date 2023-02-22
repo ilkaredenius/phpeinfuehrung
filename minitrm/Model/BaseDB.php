@@ -28,22 +28,25 @@ abstract class BaseDB {
         var_dump($this);
     }
 
+    /**
+     * findet alle Einträge in der Tabelle
+     */
     public function find($options = "") {
         $options = "";
         $table = $this->getSource();
 
-        $sql = "SELECT * FROM " . $table . " " . $options;
+        $sql = "SELECT * FROM " . $table . " " . $options;print_r($sql);
         try {
             $result = $this->getConnect()->query($sql);
-            while ($row = $result->fetch_object("MyApp\\".$this->getSource())) {
+            while ($row = $result->fetch_object("MyApp\\Model\\".$this->getSource())) {
                 $arr_collection[] = $row;
             }
             return $arr_collection;
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
-        
     }
+
     public function findFirst($id) {
         $model = new static();
 

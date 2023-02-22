@@ -4,15 +4,27 @@ namespace MyApp\Controller;
 
 use MyApp\Model\Sets;
 use Exception;
+use MyApp\lib\View;
 
-class SetsController
+class SetsController implements Controller
 {
+    protected $view;
+
+    public function setView(View $view)
+    {
+        $this->view = $view;
+    }
+
     public function indexAction()
     {
         //request this controller from postman with: minitrm/index.php?controller=index&action=index&test=123
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
-        var_dump($_GET);
+//        var_dump($_GET);
         $sets = new Sets();
+        $setsCollection = $sets->find();
+        
+        //Datenübergabe an die View person/index.phtml
+        $this->view->setData(["collection"=>$setsCollection]);
     }
 
     public function setsAnlegenAction()
