@@ -1,5 +1,44 @@
 <p>Test person</p>
 <?php
-var_dump($collection);
+//var_dump($collection);
 ?>
+<table border="1">
+    <thead>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Action</th>
+    </thead>
+            <?php
+            //foreach $collection $person
+            //TODO $person instanziieren
+            foreach ($collection as $person) {
+            ?>
+            
+    <tr>
+        <td>
+            <?php echo $person->id; ?>
+        </td>
+        <td>
+            <?php echo $person->firstname; ?>
+        </td>
+        <td>
+            <?php echo $person->lastname; ?>
+        </td>
+        <td>
+            <?php echo $person->email; ?>
+        </td>
+        <td>
+            <?php echo $person->password; ?>
+        </td>
+        <td valign="top">
+            <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $person->id; ?>">delete</a>
+        </td>
+    </tr>
+    <?php
+            }
+    ?>
+</table>
 <p>Test person</p>

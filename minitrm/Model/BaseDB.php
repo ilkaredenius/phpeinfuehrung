@@ -7,6 +7,8 @@ use Exception;
 abstract class BaseDB {
     public function getConnect() {
         try {
+            //TODO notwendig?
+            //TODO config files schreiben
             $mysqli = new mysqli("localhost", "root", "", "training");
         } catch (Exception $ee) {
             echo $ee->getMessage();
@@ -32,7 +34,7 @@ abstract class BaseDB {
      * findet alle Einträge in der Tabelle
      */
     public function find($options = "") {
-        $options = "";
+//        $options = "";
         $table = $this->getSource();
 
         $sql = "SELECT * FROM " . $table . " " . $options;print_r($sql);

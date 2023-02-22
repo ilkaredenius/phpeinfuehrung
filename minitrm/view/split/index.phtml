@@ -1,4 +1,34 @@
 <p>Test split</p>
 <?php
-var_dump($collection);
+//var_dump($collection);
 ?>
+<table border="1">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Part</th>
+        <th>Action</th>
+    </thead>
+            <?php
+            //foreach $collection $person
+            //TODO $person instanziieren
+            foreach ($collection as $excercise) {
+            ?>
+            
+    <tr>
+        <td>
+            <?php echo $excercise->id; ?>
+        </td>
+        <td>
+            <?php echo $excercise->name; ?>
+        </td>
+        <td>
+            <?php echo $excercise->part; ?>
+        <td valign="top">
+            <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $excercise->id; ?>">delete</a>
+        </td>
+    </tr>
+    <?php
+            }
+    ?>
+</table>

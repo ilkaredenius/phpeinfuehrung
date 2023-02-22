@@ -1,0 +1,74 @@
+<form action="/minitrm/index.php?controller=excercise&action=excerciseanlegen" name="neueexcercise" method="post">
+    <input type="hidden" name="controller" value="excercise">
+    <input type="hidden" name="action" value="excerciseanlegen">
+    <div>
+        <h2>
+            Neue Excercise
+        </h2>
+    </div>
+    <div>
+        <?php
+    
+    ?>
+        <h3>
+        Split, Part
+        </h3>
+        <select name="split_id>
+        <?php
+        foreach ($collection2 as $split) {
+        ?>
+            <option value="<?php echo $split->split_id; ?>"><?php echo $split->name . ", " . $split->part; ?></option>
+        <?php
+        }
+        ?>
+        </select>
+    </div>
+    <div>
+        <h3>
+        User
+        </h3>
+        <select name="user_id>
+        <?php
+        foreach ($collection as $person) {
+        ?>
+            <option value="<?php echo $person->id; ?>"><?php echo $person->firstname . " " . $person->lastname; ?></option>
+        <?php
+        }
+        ?>
+        </select>
+    </div>
+    <div>
+        <h3>
+        Name
+        </h3>
+        <input type="text" name="name">
+    </div>
+    <div>
+        <h3>
+        Number
+        </h3>
+        <input type="text" name="number">
+    </div>
+    <div>
+        <h3>
+        Sets
+        </h3>
+        <input type="text" name="sets">
+    </div>
+    <div>
+        <h3>
+        Reps
+        </h3>
+        <input type="text" name="reps">
+    </div>
+    <div>
+        <h3>
+        Sequence
+        </h3>
+        <input type="text" name="sequence">
+    </div>
+    <br>
+    <div id="speichern">
+        <input type="submit" value="speichern">
+    </div>
+</form>

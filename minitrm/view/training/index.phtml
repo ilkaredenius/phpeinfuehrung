@@ -1,4 +1,55 @@
 <p>Test training</p>
 <?php
-var_dump($collection);
+//var_dump($collection);
 ?>
+<table border="1">
+    <thead>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Day</th>
+        <th>Excercise_id</th>
+        <th>User weight</th>
+        <th>User scope</th>
+        <th>User leg</th>
+        <th>User arm</th>
+        <th>Action</th>
+    </thead>
+            <?php
+            //foreach $collection $person
+            //TODO $person instanziieren
+            foreach ($collection as $excercise) {
+            ?>
+            
+    <tr>
+        <td>
+            <?php echo $excercise->id; ?>
+        </td>
+        <td>
+            <?php echo $excercise->user_id; ?>
+        </td>
+        <td>
+            <?php echo $excercise->day; ?>
+        </td>
+        <td>
+            <?php echo $excercise->excercise_id; ?>
+        </td>
+        <td>
+            <?php echo $excercise->user_weight; ?>
+        </td>
+        <td>
+            <?php echo $excercise->user_scope; ?>
+        </td>
+        <td>
+            <?php echo $excercise->user_leg; ?>
+        </td>
+        <td>
+            <?php echo $excercise->user_arm; ?>
+        </td>
+        <td valign="top">
+            <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $excercise->id; ?>">delete</a>
+        </td>
+    </tr>
+    <?php
+            }
+    ?>
+</table>

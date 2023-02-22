@@ -3,6 +3,8 @@
 namespace MyApp\Controller;
 
 use MyApp\Model\Excercise;
+use MyApp\Model\Split;
+use MyApp\Model\Person;
 use Exception;
 use MyApp\lib\View;
 
@@ -29,27 +31,87 @@ class ExcerciseController implements Controller
 
     public function excerciseAnlegenAction()
     {
+//        var_dump($_POST);
         $excercise = new Excercise();
+        $split = new Split();
 
-        $split_part_id = "";
-        $user_id = "";
-        $name = "";
-        $number = "";
-        $sets = "";
-        $reps = "";
-        $sequence = "";
+        $splitCollection = $split->find();
 
-        try {
-            $excercise->setSplit_id($_GET['split']);
-            $excercise->setUser_id($_GET['user']);
-            $excercise->setName($_GET['name']);
-            $excercise->setNumber($_GET['number']);
-            $excercise->setSets($_GET['sets']);
-            $excercise->setReps($_GET['reps']);
-            $excercise->setSequence($_GET['sequence']);
-            $excercise->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        $person = new Person();
+        $personCollection = $person->find();
+        
+        //Datenübergabe an die View person/index.phtml
+        $this->view->setData(["collection"=>$personCollection, "collection2"=>$splitCollection]);
+        
+        $alldataflag = true;
+
+        if (!isset($_POST['split_id'])) {
+            $alldataflag = false; echo "1";
+
+        } else {
+            $split_part_id = $_POST['split_id'];
+        }
+
+        if (!isset($_POST['user_id'])) {
+            $alldataflag = false; echo "2";
+
+        } else {
+            $user_id = $_POST['user_id'];
+        }
+
+        if (!isset($_POST['name'])) {
+            $alldataflag = false; echo "3";
+
+        } else {
+            $name = $_POST['name'];
+        }
+
+        if (!isset($_POST['number'])) {
+            $alldataflag = false; echo "4";
+
+        } else {
+            $number = $_POST['number'];
+        }
+
+        if (!isset($_POST['sets'])) {
+            $alldataflag = false; echo "5";
+
+        } else {
+            $sets = $_POST['sets'];
+        }
+
+        if (!isset($_POST['reps'])) {
+            $alldataflag = false; echo "6";
+
+        } else {
+            $reps = $_POST['reps'];
+        }
+
+        if (!isset($_POST['sequence'])) {
+            $alldataflag = false; echo "6";
+
+        } else {
+            $sequence = $_POST['sequence'];
+        }
+        if ($alldataflag == true) {
+            echo"jaaaa";
+        } else {
+            echo "neee";
+        }
+
+        if ($alldataflag) {
+            try {
+                $excercise->setSplit_id($split_part_id);
+                $excercise->setUser_id($user_id);
+                $excercise->setName($name);
+                $excercise->setNumber($number);
+                $excercise->setSets($sets);
+                $excercise->setReps($reps);
+                $excercise->setSequence($sequence);
+                $excercise->save();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     }
 

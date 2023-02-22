@@ -3,6 +3,9 @@
 namespace MyApp\Controller;
 
 use MyApp\Model\Training;
+use MyApp\Model\Person;
+use MyApp\Model\Excercise;
+use MyApp\Model\Split;
 use Exception;
 use MyApp\lib\View;
 
@@ -31,6 +34,17 @@ class TrainingController implements Controller
     {
         $training = new Training();
 
+        $excercise = new Excercise();
+
+        $person = new Person();
+        $personCollection = $person->find();
+
+        $split = new Split();
+        $splitCollection = $split->find();
+        
+        //Datenübergabe an die View person/index.phtml
+        $this->view->setData(["collection"=>$personCollection, "collection2"=>$splitCollection]);
+
         $user_id = "";
         $day = "";
         $excercise_id = "";
@@ -39,17 +53,21 @@ class TrainingController implements Controller
         $user_leg = "";
         $user_arm = "";
 
-        try {
-            $training->setUser_id($_GET['user_id']);
-            $training->setDay($_GET['day']);
-            $training->setExcercise_id($_GET['excercise_id']);
-            $training->setUser_weight($_GET['user_weight']);
-            $training->setUser_scope($_GET['user_scope']);
-            $training->setUser_leg($_GET['user_leg']);
-            $training->setUser_arm($_GET['user_arm']);
-            $training->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        if (isset($_POST['user_id']) && isset($_POST['split_id'])) {
+            $excerciseCollection = $excercise->find("WHERE user_id = " . $_POST['user_id'] . " AND split_id = " . $_POST['split_id']);
+            
+            try {
+                $training->setUser_id($_GET['user_id']);
+                $training->setDay($_GET['day']);
+                $training->setExcercise_id($_GET['excercise_id']);
+                $training->setUser_weight($_GET['user_weight']);
+                $training->setUser_scope($_GET['user_scope']);
+                $training->setUser_leg($_GET['user_leg']);
+                $training->setUser_arm($_GET['user_arm']);
+                $training->save();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     }
 

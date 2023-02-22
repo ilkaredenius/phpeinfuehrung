@@ -1,4 +1,37 @@
 <p>Test sets</p>
 <?php
-var_dump($collection);
+//var_dump($collection);
 ?>
+<table border="1">
+    <thead>
+        <th>ID</th>
+        <th>Training ID</th>
+        <th>Weight</th>
+        <th>Repetitions</th>
+    </thead>
+            <?php
+            //foreach $collection $person
+            //TODO $person instanziieren
+            foreach ($collection as $split) {
+            ?>
+            
+    <tr>
+        <td>
+            <?php echo $split->id; ?>
+        </td>
+        <td>
+            <?php echo $split->training_id; ?>
+        </td>
+        <td>
+            <?php echo $split->weight; ?>
+        </td>
+        <td>
+            <?php echo $split->repetitions; ?>
+        <td valign="top">
+            <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $split->id; ?>">delete</a>
+        </td>
+    </tr>
+    <?php
+            }
+    ?>
+</table>

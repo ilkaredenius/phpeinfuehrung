@@ -34,12 +34,12 @@ class PersonController implements Controller
         $nachname = "";
         $person = new Person();
         
-        if (isset($_GET['vorname'])) {
-            $vorname = $_GET['vorname'];
+        if (isset($_GET['firstname'])) {
+            $vorname = $_GET['firstname'];
         }
 
-        if (isset($_GET['nachname'])) {
-            $nachname = $_GET['nachname'];
+        if (isset($_GET['lastname'])) {
+            $nachname = $_GET['lastname'];
         }
 
         try {
@@ -60,7 +60,5 @@ class PersonController implements Controller
             $id = $_GET['id'];
             $person->delete($id);
         }
-    }
-
-    
+    }   
 }
