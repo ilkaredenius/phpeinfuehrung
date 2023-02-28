@@ -19,13 +19,11 @@ class PersonController implements Controller
     {
         //request this controller from postman with: minitrm/index.php?controller=index&action=index&test=123
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
-//        var_dump($_GET);
         $person = new Person();
         $personCollection = $person->find();
         
         //Datenübergabe an die View person/index.phtml
         $this->view->setData(["collection"=>$personCollection]);
-    //    var_dump($personen);
     }
 
     public function personAnlegenAction()
@@ -46,6 +44,30 @@ class PersonController implements Controller
             $person->setVorname($vorname);
             $person->setNachname($nachname);
             $person->save();
+        }  catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function personBearbeitenAction()
+    {
+        $vorname = "";
+        $nachname = "";
+        $id = $_POST['id'];
+        $person = new Person();
+        
+        if (isset($_POST['firstname'])) {
+            $vorname = $_POST['firstname'];
+        }
+
+        if (isset($_POST['lastname'])) {
+            $nachname = $_POST['lastname'];
+        }
+
+        try {
+            $person->setVorname($vorname);
+            $person->setNachname($nachname);
+            $person->save($id);
         }  catch (Exception $e) {
             echo $e->getMessage();
         }

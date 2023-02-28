@@ -1,12 +1,11 @@
-<h2>Set bearbeiten</h2>
-<form action="/minitrm/index.php?controller=sets&action=setsbearbeiten" name="neueexcercise" method="post">
+<h2>Set anlegen</h2>
+<form action="/minitrm/index.php?controller=sets&action=setsanlegen" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="sets">
-    <input type="hidden" name="action" value="setsbearbeiten">
-    <input type="hidden" name="id" value="<?php echo $collection->id; ?>">
+    <input type="hidden" name="action" value="setsanlegen">
     <img src="image.png">
     <div>
         <h2>
-            Set bearbeiten
+            Neue Sets
         </h2>
     </div>
     <div>
@@ -33,7 +32,7 @@
                     Datum
                 </td>
                 <?php
-                foreach ($collectionex as $excercise) {
+                foreach ($collection as $excercise) {
                 ?>
                 <td>
                     Gewicht
@@ -57,10 +56,10 @@
             </tr>
             <tr>
                 <td>
-                    <?php echo $collection->day; ?>
+                    <?php echo $_GET['day']; ?>
                 </td>
                 <?php
-                foreach ($collectionex as $excercise) {
+                foreach ($collection as $excercise) {
                 ?>
                 <td><input type="text" name="weight<?php echo "-" . $excercise->id; ?>" value = ""></td>
                 <?php
@@ -71,7 +70,7 @@
                         }
                     }
                 ?>
-                <td><input type="text" name="<?php echo $collection->name; ?>"></td>
+                <td><input type="text" name="<?php echo $name; ?>"></td>
                 <?php
                 }
                 ?>

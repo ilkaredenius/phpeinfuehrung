@@ -1,6 +1,5 @@
-<p>Test person</p>
+<h2>User</h2>
 <?php
-//var_dump($collection);
 ?>
 <table border="1">
     <thead>
@@ -34,6 +33,7 @@
             <?php echo $person->password; ?>
         </td>
         <td valign="top">
+            <a href="/minitrm/index.php?controller=person&action=personbearbeiten&id=<?php echo $person->id; ?>">bearbeiten</a>
             <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $person->id; ?>">delete</a>
         </td>
     </tr>
@@ -41,4 +41,4 @@
             }
     ?>
 </table>
-<p>Test person</p>
+<p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>

@@ -1,6 +1,7 @@
+<h2>Training anlegen</h2>
 <form action="/minitrm/index.php?controller=training&action=traininganlegen" name="neueexcercise" method="post">
-    <input type="hidden" name="controller" value="excercise">
-    <input type="hidden" name="action" value="excerciseanlegen">
+    <input type="hidden" name="controller" value="training">
+    <input type="hidden" name="action" value="traininganlegen">
     <div>
         <h2>
             Neues Training
@@ -10,7 +11,7 @@
         <h3>
         User
         </h3>
-        <select name="user_id>
+        <select name="user_id">
         <?php
         foreach ($collection as $person) {
         ?>
@@ -24,11 +25,11 @@
         <h3>
         Split
         </h3>
-        <select name="split_id>
+        <select name="split_id">
         <?php
         foreach ($collection2 as $split) {
         ?>
-            <option value="<?php echo $split->id; ?>"><?php echo $split->name; ?></option>
+            <option value="<?php echo $split->id; ?>"><?php echo $split->name . ", " . $split->part; ?></option>
         <?php
         }
         ?>
@@ -39,20 +40,6 @@
         Day
         </h3>
         <input type="text" name="day">
-    </div>
-    <div>
-        <h3>
-        Excercise
-        </h3>
-        <select name="excercise_id>
-        <?php
-        foreach ($collection2 as $excercise) {
-        ?>
-            <option value="<?php echo $excercise->id; ?>"><?php echo $excercise->name; ?></option>
-        <?php
-        }
-        ?>
-        </select>
     </div>
     <div>
         <h3>
@@ -83,3 +70,4 @@
         <input type="submit" value="speichern">
     </div>
 </form>
+<p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>

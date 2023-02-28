@@ -1,6 +1,5 @@
-<p>Test excercise</p>
+<h2>Excercises</h2>
 <?php
-//var_dump($collection);
 ?>
 <table border="1">
     <thead>
@@ -46,10 +45,12 @@
             <?php echo $excercise->sequence; ?>
         </td>
         <td valign="top">
-            <a href="/minitrm/index.php?controller=person&action=personDelete&id=<?php echo $excercise->id; ?>">delete</a>
+            <a href="/minitrm/index.php?controller=excercise&action=excercisebearbeiten&id=<?php echo $excercise->id; ?>">bearbeiten</a>
+            <a href="/minitrm/index.php?controller=excercise&action=excercisedelete&id=<?php echo $excercise->id; ?>">delete</a>
         </td>
     </tr>
     <?php
             }
     ?>
 </table>
+<p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>

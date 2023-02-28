@@ -1,21 +1,18 @@
-<h2>Excercise anlegen</h2>
-<form action="/minitrm/index.php?controller=excercise&action=excerciseanlegen" name="neueexcercise" method="post">
+<h2>Excercise bearbeiten</h2>
+<form action="/minitrm/index.php?controller=excercise&action=excercisebearbeiten" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="excercise">
-    <input type="hidden" name="action" value="excerciseanlegen">
-    <div>
-        <h2>
-            Neue Excercise
-        </h2>
-    </div>
+    <input type="hidden" name="action" value="excercisebearbeiten">
+    <input type="hidden" name="id" value="<?php echo $excercise->id; ?>">
     <div>
         <h3>
         Split, Part
-        </h3><?php //print_r($collection2); ?>
+        </h3>
         <select name="split">
             <option value="">--Bitte auswählen--</option>
         <?php
-        foreach ($collection2 as $split) {
-            if ($split->id == $collection2->id)
+        foreach ($splits as $split) {
+            $selected = "";
+            if ($split->id == $excercise->split_id)
                 $selected = "selected";
         ?>
             <option value="<?php echo $split->id; ?>" <?php echo $selected; ?>><?php echo $split->name . ", " . $split->part; ?></option>
@@ -31,9 +28,12 @@
         <select name="user">
             <option value="">--Bitte auswählen--</option>
         <?php
-        foreach ($collection as $person) {
+        foreach ($personlist as $persone) {
+            $selected = "";
+            if ($persone->id == $excercise->user_id)
+                $selected = "selected";
         ?>
-            <option value="<?php echo $person->id; ?>"><?php echo $person->firstname . " " . $person->lastname; ?></option>
+            <option value="<?php echo $persone->id; ?>" <?php echo $selected; ?>><?php echo $persone->firstname . " " . $persone->lastname; ?></option>
         <?php
         }
         ?>
@@ -43,31 +43,31 @@
         <h3>
         Name
         </h3>
-        <input type="text" name="name">
+        <input type="text" name="name" value="<?php echo $excercise->name; ?>">
     </div>
     <div>
         <h3>
         Number
         </h3>
-        <input type="text" name="number">
+        <input type="text" name="number" value="<?php echo $excercise->number; ?>">
     </div>
     <div>
         <h3>
         Sets
         </h3>
-        <input type="text" name="sets">
+        <input type="text" name="sets" value="<?php echo $excercise->sets; ?>">
     </div>
     <div>
         <h3>
         Reps
         </h3>
-        <input type="text" name="reps">
+        <input type="text" name="reps" value="<?php echo $excercise->reps; ?>">
     </div>
     <div>
         <h3>
         Sequence
         </h3>
-        <input type="text" name="sequence">
+        <input type="text" name="sequence" value="<?php echo $excercise->sequence; ?>">
     </div>
     <br>
     <div id="speichern">

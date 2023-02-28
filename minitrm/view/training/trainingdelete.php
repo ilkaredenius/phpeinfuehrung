@@ -1,1 +1,0 @@
-<p>Das L&ouml;schen war wahrscheinlich erfolgreich.</p>

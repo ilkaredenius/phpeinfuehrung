@@ -19,7 +19,6 @@ class SplitController implements Controller
     {
         //request this controller from postman with: minitrm/index.php?controller=index&action=index&test=123
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
-//        var_dump($_GET);
         $split = new Split();
         $splitCollection = $split->find();
         

@@ -4,6 +4,10 @@ namespace MyApp\Model;
 use mysqli;
 use Exception;
 
+if (isset($id))
+    $id = $id;
+else
+    $id = "";
 abstract class BaseDB {
     public function getConnect() {
         try {
@@ -36,8 +40,9 @@ abstract class BaseDB {
     public function find($options = "") {
 //        $options = "";
         $table = $this->getSource();
+        $arr_collection = array();
 
-        $sql = "SELECT * FROM " . $table . " " . $options;print_r($sql);
+        $sql = "SELECT * FROM " . $table . " " . $options;
         try {
             $result = $this->getConnect()->query($sql);
             while ($row = $result->fetch_object("MyApp\\Model\\".$this->getSource())) {
@@ -59,7 +64,7 @@ abstract class BaseDB {
             $sql = "SELECT * FROM " . $table . " " . $options;
 
             $result = $model->getConnect()->query($sql);
-            while ($row = $result->fetch_object("MyApp\\".$this->getSource())) {
+            while ($row = $result->fetch_object("MyApp\\Model\\".$this->getSource())) {
                 return $row;
             }
         } catch (Exception $ee) {
@@ -119,13 +124,13 @@ abstract class BaseDB {
             }
         } else {
             try {
-                $sql = "UPDATE a"  .$table .
+                $sql = "UPDATE "  .$table .
                     " SET " . $neunamevalue .
                     " WHERE id = " . $id;
             } catch (Exception $ee) {
                 echo $ee->getMessage();
             }
-        }echo $sql;
+        }
         $result = $model->getConnect()->query($sql);
         return true;
     }

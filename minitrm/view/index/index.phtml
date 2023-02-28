@@ -1,1 +1,72 @@
-<p>Test</p>
+<div>
+    <h2>Trainingsplan</h2>
+</div>
+<p>
+    <a href="index.php?controller=sets&action=index">Sets</a>
+</p>
+<?php
+if (isset($_POST['save'])) {
+if ($_POST['save'] == 1) {
+    echo $_POST['user'] . " - " . $_POST['datum'];
+?>
+<p>
+    <a href="index.php?controller=sets&action=setsanlegen&user_id=<?php echo $_POST['user']; ?>&day=<?php echo $_POST['datum']; ?>">Sets anlegen</a>
+</p>
+<?php
+}} else {
+    $_POST['save'] = 0;
+?>
+<form action="/minitrm/index.php?controller=index&action=index" name="neueindex" method="post">
+<input type="hidden" name="save" value="1">
+<div>
+    <h3>
+        F&uuml;r Sets:
+    </h3>
+    <h3>
+        User
+    </h3>
+    <p>
+        <select name="user">
+            <?php
+            foreach ($collection as $person) {
+                ?>
+                <option value="<?php echo $person->id; ?>"><?php echo $person->firstname . " " . $person->lastname; ?></option>
+                <?php
+            }
+            ?>
+        </select>
+    </p>
+</div>
+<div>
+    <h3>
+        Datum
+    </h3>
+    <p>
+        <input type="text" name="datum">
+    </p>
+</div>
+<div id="speichern">
+    <input type="submit" value="speichern">
+</div>
+</form>
+<?php
+}
+?>
+<p>
+    <a href="index.php?controller=excercise&action=index">Excercises</a>
+</p>
+<p>
+    <a href="index.php?controller=excercise&action=excerciseanlegen">Excercise anlegen</a>
+</p>
+<p>
+    <a href="index.php?controller=training&action=index">Trainings</a>
+</p>
+<p>
+    <a href="index.php?controller=training&action=traininganlegen">Training anlegen</a>
+</p>
+<p>
+    <a href="index.php?controller=person&action=index">User</a>
+</p>
+<p>
+    <a href="index.php?controller=person&action=personanlegen">Neuer User</a>
+</p>

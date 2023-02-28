@@ -1,10 +1,11 @@
-<h2>Training anlegen</h2>
-<form action="/minitrm/index.php?controller=training&action=traininganlegen" name="neueexcercise" method="post">
-    <input type="hidden" name="controller" value="excercise">
-    <input type="hidden" name="action" value="excerciseanlegen">
+<h2>Training bearbeiten</h2>
+<form action="/minitrm/index.php?controller=training&action=trainingbearbeiten" name="neueexcercise" method="post">
+    <input type="hidden" name="controller" value="training">
+    <input type="hidden" name="action" value="trainingbearbeiten">
+    <input type="hidden" name="id" value="<?php echo $collection3->id; ?>">
     <div>
         <h2>
-            Neues Training
+            Training
         </h2>
     </div>
     <div>
@@ -14,8 +15,11 @@
         <select name="user_id">
         <?php
         foreach ($collection as $person) {
+            $selected = "";
+            if ($person->id == $collection3->user_id)
+                $selected = "selected";
         ?>
-            <option value="<?php echo $person->id; ?>"><?php echo $person->firstname . " " . $person->lastname; ?></option>
+            <option value="<?php echo $person->id; ?>" <?php echo $selected; ?>><?php echo $person->firstname . " " . $person->lastname; ?></option>
         <?php
         }
         ?>
@@ -28,8 +32,11 @@
         <select name="split_id">
         <?php
         foreach ($collection2 as $split) {
+            $selected = "";
+            if ($split->id == $collection4->split_id)
+                $selected = "selected";
         ?>
-            <option value="<?php echo $split->id; ?>"><?php echo $split->name . ", " . $split->part; ?></option>
+            <option value="<?php echo $split->id; ?>" <?php echo $selected; ?>><?php echo $split->name . ", " . $split->part; ?></option>
         <?php
         }
         ?>
@@ -39,31 +46,31 @@
         <h3>
         Day
         </h3>
-        <input type="text" name="day">
+        <input type="text" name="day" value="<?php echo $collection3->day; ?>">
     </div>
     <div>
         <h3>
         User Weight
         </h3>
-        <input type="text" name="user_weight">
+        <input type="text" name="user_weight" value="<?php echo $collection3->user_weight; ?>">
     </div>
     <div>
         <h3>
         User Scope
         </h3>
-        <input type="text" name="user_scope">
+        <input type="text" name="user_scope" value="<?php echo $collection3->user_scope; ?>">
     </div>
     <div>
         <h3>
         User Leg
         </h3>
-        <input type="text" name="user_leg">
+        <input type="text" name="user_leg" value="<?php echo $collection3->user_leg; ?>">
     </div>
     <div>
         <h3>
         User Arm
         </h3>
-        <input type="text" name="user_arm">
+        <input type="text" name="user_arm" value="<?php echo $collection3->user_arm; ?>">
     </div>
     <br>
     <div id="speichern">
