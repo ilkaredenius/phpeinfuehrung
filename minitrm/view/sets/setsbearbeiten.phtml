@@ -1,0 +1,89 @@
+<h2>Set bearbeiten</h2>
+<form action="/minitrm/index.php?controller=sets&action=setsbearbeiten" name="neueexcercise" method="post">
+    <input type="hidden" name="controller" value="sets">
+    <input type="hidden" name="action" value="setsbearbeiten">
+    <img src="image.png">
+    <div>
+        <h2>
+            Set bearbeiten
+        </h2>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <td>
+
+                </td>
+                <?php
+                foreach ($collection as $excercise) {
+                ?>
+                <td colspan="5">
+                    <?php echo $excercise->name; ?>
+                </td>
+                <?php
+                }
+                ?>
+                <td>
+                    gesamt
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Datum
+                </td>
+                <?php
+                foreach ($collection as $excercise) {
+                ?>
+                <td>
+                    Gewicht
+                </td>
+                <?php
+                for ($i = 1; $i < $excercise->sets; $i++) {
+                ?>
+                <td>
+                    Satz <?php echo $i; ?>
+                </td>
+                <?php
+                }
+                ?>
+                <td>
+                    ges. Gewicht
+                </td>
+                <?php
+                }
+                ?>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $_GET['day']; ?>
+                </td>
+                <?php
+                foreach ($collection as $excercise) {
+                ?>
+                <td><input type="text" name="weight<?php echo "-" . $excercise->id; ?>" value = ""></td>
+                <?php
+                for ($i = 1; $i < $excercise->sets; $i++) {
+                    foreach ($collection2 as $training) {
+                        if ($excercise->id == $training->excercise_id) {
+                            $name = $training->id . "-" . $i;
+                        }
+                    }
+                ?>
+                <td><input type="text" name="<?php echo $name; ?>"></td>
+                <?php
+                }
+                ?>
+                <td>599</td>
+                <?php
+                }
+                ?>
+                <td>1000</td>
+            </tr>
+        </table>
+    <br>
+    <div id="speichern">
+        <input type="submit" value="speichern">
+    </div>
+</form>
+<p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>
