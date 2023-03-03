@@ -2,14 +2,15 @@
 
 namespace MyApp\Controller;
 
-use MyApp\Model\Training;
-use MyApp\Model\Person;
-use MyApp\Model\Excercise;
-use MyApp\Model\Split;
 use Exception;
 use MyApp\lib\View;
+use MyApp\Model\Excercise;
+use MyApp\Model\Person;
+use MyApp\Model\Split;
+use MyApp\Model\Training;
+use MyApp\Controller\ControllerInterface;
 
-class TrainingController implements Controller
+class TrainingController extends Controller implements ControllerInterface
 {
     protected $view;
 
@@ -24,9 +25,9 @@ class TrainingController implements Controller
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
         $training = new Training();
         $trainingCollection = $training->find();
-        
+
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$trainingCollection]);
+        $this->view->setData(["collection" => $trainingCollection]);
     }
 
     public function trainingAnlegenAction()
@@ -40,9 +41,9 @@ class TrainingController implements Controller
 
         $split = new Split();
         $splitCollection = $split->find();
-        
+
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$personCollection, "collection2"=>$splitCollection]);
+        $this->view->setData(["collection" => $personCollection, "collection2" => $splitCollection]);
 
         $user_id = "";
         $day = "";
@@ -52,17 +53,17 @@ class TrainingController implements Controller
         $user_leg = "";
         $user_arm = "";
 
-        if (isset($_POST['user_id']) && isset($_POST['split_id'])) {
-            $excerciseCollection = $excercise->find("WHERE user_id = " . $_POST['user_id'] . " AND split_id = " . $_POST['split_id']);
+        if (isset($this->vars['user_id']) && isset($this->vars['split_id'])) {
+            $excerciseCollection = $excercise->find("WHERE user_id = " . $this->vars['user_id'] . " AND split_id = " . $this->vars['split_id']);
             foreach ($excerciseCollection as $excercises) {
                 try {
-                    $training->setUser_id($_POST['user_id']);
-                    $training->setDay($_POST['day']);
+                    $training->setUser_id($this->vars['user_id']);
+                    $training->setDay($this->vars['day']);
                     $training->setExcercise_id($excercises->id);
-                    $training->setUser_weight($_POST['user_weight']);
-                    $training->setUser_scope($_POST['user_scope']);
-                    $training->setUser_leg($_POST['user_leg']);
-                    $training->setUser_arm($_POST['user_arm']);
+                    $training->setUser_weight($this->vars['user_weight']);
+                    $training->setUser_scope($this->vars['user_scope']);
+                    $training->setUser_leg($this->vars['user_leg']);
+                    $training->setUser_arm($this->vars['user_arm']);
                     $training->save();
                 } catch (Exception $e) {
                     echo $e->getMessage();
@@ -73,10 +74,8 @@ class TrainingController implements Controller
 
     public function trainingBearbeitenAction()
     {
-        if (isset($_GET['id']))
-            $id = $_GET['id'];
-        if (isset($_POST['id']))
-            $id = $_POST['id'];
+        if (isset($this->vars['id']))
+            $id = $this->vars['id'];
 
         $training = new Training();
         $trainingCollection = $training->findFirst($id);
@@ -91,10 +90,10 @@ class TrainingController implements Controller
         $splitCollection = $split->find();
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$personCollection,
-                                "collection2"=>$splitCollection,
-                                "collection3"=>$trainingCollection,
-                                "collection4"=>$excerciseColl]);
+        $this->view->setData(["collection" => $personCollection,
+            "collection2" => $splitCollection,
+            "collection3" => $trainingCollection,
+            "collection4" => $excerciseColl]);
 
         $user_id = "";
         $day = "";
@@ -104,18 +103,18 @@ class TrainingController implements Controller
         $user_leg = "";
         $user_arm = "";
 
-        if (isset($_POST['user_id']) && isset($_POST['split_id'])) {
-            $excerciseCollection = $excercise->find("WHERE user_id = " . $_POST['user_id'] . " AND split_id = " . $_POST['split_id']);
+        if (isset($this->vars['user_id']) && isset($this->vars['split_id'])) {
+            $excerciseCollection = $excercise->find("WHERE user_id = " . $this->vars['user_id'] . " AND split_id = " . $this->vars['split_id']);
             foreach ($excerciseCollection as $excercises) {
                 try {
-                    $training->setUser_id($_POST['user_id']);
-                    $training->setDay($_POST['day']);
+                    $training->setUser_id($this->vars['user_id']);
+                    $training->setDay($this->vars['day']);
                     $training->setExcercise_id($excercises->id);
-                    $training->setUser_weight($_POST['user_weight']);
-                    $training->setUser_scope($_POST['user_scope']);
-                    $training->setUser_leg($_POST['user_leg']);
-                    $training->setUser_arm($_POST['user_arm']);
-                    $training->save();
+                    $training->setUser_weight($this->vars['user_weight']);
+                    $training->setUser_scope($this->vars['user_scope']);
+                    $training->setUser_leg($this->vars['user_leg']);
+                    $training->setUser_arm($this->vars['user_arm']);
+                    $training->save($id);
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
@@ -128,8 +127,8 @@ class TrainingController implements Controller
         $id = "";
         $training = new Training();
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($this->vars['id'])) {
+            $id = $this->vars['id'];
             $training->delete($id);
         }
     }

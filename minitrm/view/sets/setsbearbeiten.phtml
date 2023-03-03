@@ -2,13 +2,8 @@
 <form action="/minitrm/index.php?controller=sets&action=setsbearbeiten" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="sets">
     <input type="hidden" name="action" value="setsbearbeiten">
-    <input type="hidden" name="id" value="<?php echo $collection->id; ?>">
+    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
     <img src="image.png">
-    <div>
-        <h2>
-            Set bearbeiten
-        </h2>
-    </div>
     <div>
         <table border="1">
             <tr>

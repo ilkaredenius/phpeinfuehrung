@@ -3,11 +3,6 @@
     <input type="hidden" name="controller" value="excercise">
     <input type="hidden" name="action" value="excerciseanlegen">
     <div>
-        <h2>
-            Neue Excercise
-        </h2>
-    </div>
-    <div>
         <h3>
         Split, Part
         </h3><?php //print_r($collection2); ?>
@@ -15,10 +10,8 @@
             <option value="">--Bitte auswählen--</option>
         <?php
         foreach ($collection2 as $split) {
-            if ($split->id == $collection2->id)
-                $selected = "selected";
         ?>
-            <option value="<?php echo $split->id; ?>" <?php echo $selected; ?>><?php echo $split->name . ", " . $split->part; ?></option>
+            <option value="<?php echo $split->id; ?>"><?php echo $split->name . ", " . $split->part; ?></option>
         <?php
         }
         ?>

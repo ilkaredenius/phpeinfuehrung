@@ -2,14 +2,16 @@
 
 namespace MyApp\Controller;
 
-use MyApp\Model\Excercise;
-use MyApp\Model\Split;
-use MyApp\Model\Person;
 use Exception;
 use MyApp\lib\View;
+use MyApp\Model\Excercise;
+use MyApp\Model\Person;
+use MyApp\Model\Split;
+use MyApp\Controller\ControllerInterface;
 
-class ExcerciseController implements Controller
-{   
+
+class ExcerciseController extends Controller implements ControllerInterface
+{
     protected $view;
 
     public function setView(View $view)
@@ -23,9 +25,9 @@ class ExcerciseController implements Controller
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
         $excercise = new Excercise();
         $excerciseCollection = $excercise->find();
-        
+
         //Datenübergabe an die View excercise/index.phtml
-        $this->view->setData(["collection"=>$excerciseCollection]);
+        $this->view->setData(["collection" => $excerciseCollection]);
     }
 
     public function excerciseAnlegenAction()
@@ -35,65 +37,65 @@ class ExcerciseController implements Controller
 
         $splitCollection = $split->find();
 
-        if (isset($_GET['id'])) {
+        if (isset($this->vars['id'])) {
             //Datenübergabe an die View excercise/excerciseanlegen.phtml
-            $excerciseCollectionFirst = $excercise->findFirst($_GET['id']);
+            $excerciseCollectionFirst = $excercise->findFirst($this->vars['id']);
         }
 
         $person = new Person();
         $personCollection = $person->find();
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$personCollection, "collection2"=>$splitCollection]);
-        
+        $this->view->setData(["collection" => $personCollection, "collection2" => $splitCollection]);
+
         $alldataflag = true;
-        if (!isset($_POST['split'])) {
+        if (!isset($this->vars['split'])) {
             $alldataflag = false;
 
         } else {
-            $split_part_id = $_POST['split'];
+            $split_part_id = $this->vars['split'];
         }
 
-        if (!isset($_POST['user'])) {
+        if (!isset($this->vars['user'])) {
             $alldataflag = false;
 
         } else {
-            $user_id = $_POST['user'];
+            $user_id = $this->vars['user'];
         }
 
-        if (!isset($_POST['name'])) {
+        if (!isset($this->vars['name'])) {
             $alldataflag = false;
 
         } else {
-            $name = $_POST['name'];
+            $name = $this->vars['name'];
         }
 
-        if (!isset($_POST['number'])) {
+        if (!isset($this->vars['number'])) {
             $alldataflag = false;
 
         } else {
-            $number = $_POST['number'];
+            $number = $this->vars['number'];
         }
 
-        if (!isset($_POST['sets'])) {
+        if (!isset($this->vars['sets'])) {
             $alldataflag = false;
 
         } else {
-            $sets = $_POST['sets'];
+            $sets = $this->vars['sets'];
         }
 
-        if (!isset($_POST['reps'])) {
+        if (!isset($this->vars['reps'])) {
             $alldataflag = false;
 
         } else {
-            $reps = $_POST['reps'];
+            $reps = $this->vars['reps'];
         }
 
-        if (!isset($_POST['sequence'])) {
+        if (!isset($this->vars['sequence'])) {
             $alldataflag = false;
 
         } else {
-            $sequence = $_POST['sequence'];
+            $sequence = $this->vars['sequence'];
         }
 
         if ($alldataflag) {
@@ -118,10 +120,8 @@ class ExcerciseController implements Controller
         $split = new Split();
         $person = new Person();
 
-        if (isset($_GET['id']))
-            $id = $_GET['id'];
-        if (isset($_POST['id']))
-            $id = $_POST['id'];
+        if (isset($this->vars['id']))
+            $id = $this->vars['id'];
 
         $excerciseCollection = $excercise->findFirst($id);
 
@@ -130,65 +130,65 @@ class ExcerciseController implements Controller
 
         $splitCollection = $split->find();
 
-        if (isset($_GET['id'])) {
+        if (isset($this->vars['id'])) {
             //Datenübergabe an die View excercise/excerciseanlegen.phtml
-            $excerciseCollectionFirst = $excercise->findFirst($_GET['id']);
+            $excerciseCollectionFirst = $excercise->findFirst($this->vars['id']);
         }
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["excercise"=>$excerciseCollection, 
-                            "splits"=>$splitCollection, 
-                            "person"=>$person, 
-                            "personlist"=>$personlist]);
-        
+        $this->view->setData(["excercise" => $excerciseCollection,
+            "splits" => $splitCollection,
+            "person" => $person,
+            "personlist" => $personlist]);
+
         $alldataflag = true;
-        if (!isset($_POST['split'])) {
+        if (!isset($this->vars['split'])) {
             $alldataflag = false;
 
         } else {
-            $split_part_id = $_POST['split'];
+            $split_part_id = $this->vars['split'];
         }
 
-        if (!isset($_POST['user'])) {
+        if (!isset($this->vars['user'])) {
             $alldataflag = false;
 
         } else {
-            $user_id = $_POST['user'];
+            $user_id = $this->vars['user'];
         }
 
-        if (!isset($_POST['name'])) {
+        if (!isset($this->vars['name'])) {
             $alldataflag = false;
 
         } else {
-            $name = $_POST['name'];
+            $name = $this->vars['name'];
         }
 
-        if (!isset($_POST['number'])) {
+        if (!isset($this->vars['number'])) {
             $alldataflag = false;
 
         } else {
-            $number = $_POST['number'];
+            $number = $this->vars['number'];
         }
 
-        if (!isset($_POST['sets'])) {
+        if (!isset($this->vars['sets'])) {
             $alldataflag = false;
 
         } else {
-            $sets = $_POST['sets'];
+            $sets = $this->vars['sets'];
         }
 
-        if (!isset($_POST['reps'])) {
+        if (!isset($this->vars['reps'])) {
             $alldataflag = false;
 
         } else {
-            $reps = $_POST['reps'];
+            $reps = $this->vars['reps'];
         }
 
-        if (!isset($_POST['sequence'])) {
+        if (!isset($this->vars['sequence'])) {
             $alldataflag = false;
 
         } else {
-            $sequence = $_POST['sequence'];
+            $sequence = $this->vars['sequence'];
         }
 
         if ($alldataflag) {
@@ -201,7 +201,7 @@ class ExcerciseController implements Controller
                 $excercise->setSets($sets);
                 $excercise->setReps($reps);
                 $excercise->setSequence($sequence);
-                $excercise->save();
+                $excercise->save($id);
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
@@ -213,8 +213,8 @@ class ExcerciseController implements Controller
         $id = "";
         $excercise = new Excercise();
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($this->vars['id'])) {
+            $id = $this->vars['id'];
             $excercise->delete($id);
         }
     }

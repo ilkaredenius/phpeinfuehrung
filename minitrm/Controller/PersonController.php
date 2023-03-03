@@ -2,11 +2,12 @@
 
 namespace MyApp\Controller;
 
-use MyApp\Model\Person;
 use Exception;
 use MyApp\lib\View;
+use MyApp\Model\Person;
+use MyApp\Controller\ControllerInterface;
 
-class PersonController implements Controller
+class PersonController extends Controller implements ControllerInterface
 {
     protected $view;
 
@@ -21,9 +22,9 @@ class PersonController implements Controller
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
         $person = new Person();
         $personCollection = $person->find();
-        
+
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$personCollection]);
+        $this->view->setData(["collection" => $personCollection]);
     }
 
     public function personAnlegenAction()
@@ -31,20 +32,21 @@ class PersonController implements Controller
         $vorname = "";
         $nachname = "";
         $person = new Person();
+        $person->debug();
         
-        if (isset($_GET['firstname'])) {
-            $vorname = $_GET['firstname'];
+        if (isset($this->vars['firstname'])) {
+            $vorname = $this->vars['firstname'];
         }
 
-        if (isset($_GET['lastname'])) {
-            $nachname = $_GET['lastname'];
+        if (isset($this->vars['lastname'])) {
+            $nachname = $this->vars['lastname'];
         }
 
         try {
             $person->setVorname($vorname);
             $person->setNachname($nachname);
             $person->save();
-        }  catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -53,22 +55,25 @@ class PersonController implements Controller
     {
         $vorname = "";
         $nachname = "";
-        $id = $_POST['id'];
+        $id = $this->vars['id'];
         $person = new Person();
-        
-        if (isset($_POST['firstname'])) {
-            $vorname = $_POST['firstname'];
+
+        $personCollect = $person->findFirst($this->vars['id']);
+        $this->view->setData(["person" => $personCollect]);
+
+        if (isset($this->vars['firstname'])) {
+            $vorname = $this->vars['firstname'];
         }
 
-        if (isset($_POST['lastname'])) {
-            $nachname = $_POST['lastname'];
+        if (isset($this->vars['lastname'])) {
+            $nachname = $this->vars['lastname'];
         }
 
         try {
             $person->setVorname($vorname);
             $person->setNachname($nachname);
             $person->save($id);
-        }  catch (Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -78,9 +83,9 @@ class PersonController implements Controller
         $id = "";
         $person = new Person();
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($this->vars['id'])) {
+            $id = $this->vars['id'];
             $person->delete($id);
         }
-    }   
+    }
 }

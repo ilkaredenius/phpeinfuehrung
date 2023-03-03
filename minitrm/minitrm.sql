@@ -64,7 +64,11 @@ CREATE TABLE `person` (
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+CREATE TABLE `tabellex` (
+  `Spaltea` int(11) null,
+  `Spalteb` varchar(255) not null,
+  `Spaltec` int(11) null
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Daten für Tabelle `person`
 --

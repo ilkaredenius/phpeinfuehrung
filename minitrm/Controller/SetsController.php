@@ -2,13 +2,15 @@
 
 namespace MyApp\Controller;
 
-use MyApp\Model\Sets;
-use MyApp\Model\Training;
-use MyApp\Model\Excercise;
 use Exception;
 use MyApp\lib\View;
+use MyApp\Model\Excercise;
+use MyApp\Model\Sets;
+use MyApp\Model\Training;
+use MyApp\Controller\ControllerInterface;
 
-class SetsController implements Controller
+
+class SetsController extends Controller implements ControllerInterface
 {
     protected $view;
 
@@ -25,23 +27,27 @@ class SetsController implements Controller
         $setsCollection = $sets->find();
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$setsCollection]);
+        $this->view->setData(["collection" => $setsCollection]);
     }
 
     public function setsAnlegenAction()
-    {
+    {var_dump($this->vars);
+        if (isset($this->vars['user_id']))
+            $user = $this->vars['user_id'];
+        if (isset($this->vars['day']))
+            $day = $this->vars['day'];
         $sets = new Sets();
         $setsCollection = $sets->find();
 
         //Datenübergabe an die View sets/index.phtml
-        $this->view->setData(["collection"=>$setsCollection]);
+        $this->view->setData(["collection" => $setsCollection]);
 
         //TODO Sets laden
-        $setsCollectionTraining = $sets->find("WHERE training_id = ");
+    //  $setsCollectionTraining = $sets->find("WHERE training_id = ");
 
         $excerciseCollection = array();
         $training = new Training();
-        $trainingCollection = $training->find("WHERE user_id = " . $_GET['user'] . " AND day = " . $_GET['day']);
+        $trainingCollection = $training->find("WHERE user_id = " . $user . " AND day = '" . $day . "'");
 
         foreach ($trainingCollection as $train) {
             $excercise = new Excercise();
@@ -49,15 +55,15 @@ class SetsController implements Controller
         }
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$excerciseCollection, "collection2"=>$trainingCollection]);
+        $this->view->setData(["collection" => $excerciseCollection, "collection2" => $trainingCollection, "user" => $user]);
 
         $weight = 0;
-        foreach ($_POST as $key=>$value) {
+        foreach ($this->vars as $key => $value) {
             if ($key == "action") continue;
             if ($key == "controller") continue;
-           
-            $arr = explode ("-", $key);
-            if ($arr[0] == "weight"){ 
+
+            $arr = explode("-", $key);
+            if ($arr[0] == "weight") {
                 $weight = $value;
                 continue;
             }
@@ -75,23 +81,20 @@ class SetsController implements Controller
 
     public function setsBearbeitenAction()
     {
-        if (isset($_GET['id']))
-            $id = $_GET['id'];
-        if (isset($_POST['id']))
-            $id = $_POST['id'];
+        $id = $this->vars['id'];
 
         $sets = new Sets();
         $setsCollection = $sets->findFirst($id);
 
         //Datenübergabe an die View sets/index.phtml
-        $this->view->setData(["collection"=>$setsCollection]);
+        $this->view->setData(["collection" => $setsCollection]);
 
-        //TODO Sets laden
-        $setsCollectionTraining = $sets->find("WHERE id = " . $id);
+        $training = new Training();
+        $setsCollectionTraining = $training->findFirst($setsCollection->training_id);
 
         $excerciseCollection = array();
         $training = new Training();
-        $trainingCollection = $training->find("WHERE user_id = " . $_GET['user'] . " AND day = " . $_GET['day']);
+        $trainingCollection = $training->find("WHERE user_id = " . $setsCollectionTraining->user_id . " AND day = " . $setsCollectionTraining->day);
 
         foreach ($trainingCollection as $train) {
             $excercise = new Excercise();
@@ -99,15 +102,15 @@ class SetsController implements Controller
         }
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collectionex"=>$excerciseCollection, "collection2"=>$trainingCollection]);
+        $this->view->setData(["collectionex" => $excerciseCollection, "collection2" => $trainingCollection]);
 
         $weight = 0;
-        foreach ($_POST as $key=>$value) {
+        foreach ($this->vars as $key => $value) {
             if ($key == "action") continue;
             if ($key == "controller") continue;
 
-            $arr = explode ("-", $key);
-            if ($arr[0] == "weight"){
+            $arr = explode("-", $key);
+            if ($arr[0] == "weight") {
                 $weight = $value;
                 continue;
             }
@@ -116,7 +119,7 @@ class SetsController implements Controller
                 $sets->setTraining_id($arr[0]);
                 $sets->setWeight($weight);
                 $sets->setRepetitions($value);
-                $sets->save();
+                $sets->save($id);
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
@@ -128,8 +131,8 @@ class SetsController implements Controller
         $id = "";
         $sets = new Sets();
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($this->vars['id'])) {
+            $id = $this->vars['id'];
             $sets->delete($id);
         }
     }

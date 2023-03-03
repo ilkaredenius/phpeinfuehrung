@@ -2,11 +2,12 @@
 
 namespace MyApp\Controller;
 
-use MyApp\Model\Split;
 use Exception;
 use MyApp\lib\View;
+use MyApp\Model\Split;
+use MyApp\Controller\ControllerInterface;
 
-class SplitController implements Controller
+class SplitController extends Controller implements ControllerInterface
 {
     protected $view;
 
@@ -21,9 +22,9 @@ class SplitController implements Controller
         //minitrm/index.php?controller=index&action=index&vorname=Ilka&nachname=Redenius
         $split = new Split();
         $splitCollection = $split->find();
-        
+
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection"=>$splitCollection]);
+        $this->view->setData(["collection" => $splitCollection]);
     }
 
     public function splitAnlegenAction()
@@ -35,7 +36,7 @@ class SplitController implements Controller
             for ($i = 1; $i <= $n; $i++) {
                 try {
                     $split->setPart($i);
-                    $split->setName($n.'-split');
+                    $split->setName($n . '-split');
                     $split->save();
                 } catch (Exception $e) {
                     echo $e->getMessage();
@@ -49,8 +50,8 @@ class SplitController implements Controller
         $id = "";
         $split = new Split();
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($this->vars['id'])) {
+            $id = $this->vars['id'];
             $split->delete($id);
         }
     }

@@ -3,17 +3,15 @@ namespace MyApp\Model;
 
 use mysqli;
 use Exception;
+use MyApp\Controller\ControllerInterface;
+use MyApp\lib\DB;
 
-if (isset($id))
-    $id = $id;
-else
-    $id = "";
 abstract class BaseDB {
-    public function getConnect() {
+    public function getConnectAlt() {
         try {
             //TODO notwendig?
             //TODO config files schreiben
-            $mysqli = new mysqli("localhost", "root", "", "training");
+            $mysqli = new mysqli("localhost", "root", "", "trainingneu");
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
@@ -31,7 +29,10 @@ abstract class BaseDB {
     }
 
     public function debug(){
-        var_dump($this);
+        $a1 = DB::getInstance()->getConnect();
+        $a2 = DB::getInstance()->getConnect();
+        var_dump($a1);
+        var_dump($a2);
     }
 
     /**
@@ -44,7 +45,7 @@ abstract class BaseDB {
 
         $sql = "SELECT * FROM " . $table . " " . $options;
         try {
-            $result = $this->getConnect()->query($sql);
+            $result = DB::getInstance()->getConnect()->query($sql);
             while ($row = $result->fetch_object("MyApp\\Model\\".$this->getSource())) {
                 $arr_collection[] = $row;
             }
@@ -63,7 +64,7 @@ abstract class BaseDB {
         try {
             $sql = "SELECT * FROM " . $table . " " . $options;
 
-            $result = $model->getConnect()->query($sql);
+            $result = DB::getInstance()->getConnect()->query($sql);
             while ($row = $result->fetch_object("MyApp\\Model\\".$this->getSource())) {
                 return $row;
             }
@@ -72,7 +73,7 @@ abstract class BaseDB {
         }
     }
 
-    public function save() {
+    public function save($idx = "") {
         $model = new static();
         $table = $model->getSource();
         $nameneu = "";
@@ -81,13 +82,10 @@ abstract class BaseDB {
         $neuname = "";
         $neuvalue = "";
         $neunamevalue = "";
-        $id = "";
+        $id = $idx;
 
         foreach($this as $name=>$value) {
-            if ($name == "id") {
-                $id = $value;
-            }
-            
+
             if ($name == "created_at") {
                 $nameneu .= $name . ", ";
                 $valueneu .= "'" . date("Y-m-d") . "', ";
@@ -95,16 +93,19 @@ abstract class BaseDB {
             }
 
             if ($name == "updated_at") {
-                $nameneu .= $name . ", ";
-                $valueneu .= "'" . date("Y-m-d") . "', ";
-                $namevalue .= $name . " = '" . $value . "', ";
-                continue;
+                if ($name != "id") {
+                    $nameneu .= $name . ", ";
+                    $valueneu .= "'" . date("Y-m-d") . "', ";
+                    $namevalue .= $name . " = '" . $value . "', ";
+                    continue;
+                }
             }
             
             $nameneu .= $name . ", ";
             $valueneu .= "'" . $value . "', ";
-            
-            $namevalue .= $name . " = '" . $value . "', ";
+
+            if ($name != "id")
+                $namevalue .= $name . " = '" . $value . "', ";
         }
         
         $neuname = substr($nameneu, 0, -2);
@@ -112,7 +113,7 @@ abstract class BaseDB {
         $neunamevalue = substr($namevalue, 0, -2);
 
         $mod = "insert";
-        if (isset($id)) 
+        if ($id != "")
             $mod = "update";
 
         if ($mod == "insert") {
@@ -131,7 +132,8 @@ abstract class BaseDB {
                 echo $ee->getMessage();
             }
         }
-        $result = $model->getConnect()->query($sql);
+        $mysqli = DB::getInstance()->getConnect();
+        $result = $mysqli->query($sql);
         return true;
     }
 
@@ -144,7 +146,7 @@ abstract class BaseDB {
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
-        $result = $model->getConnect()->query($sql);
+        $result = DB::getInstance()->getConnect()->query($sql);
     }
 
     abstract public function getSource();
