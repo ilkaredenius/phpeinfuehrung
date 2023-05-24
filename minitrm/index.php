@@ -1,4 +1,9 @@
+ivan ist coooool !
+
+
 <?php
+
+/*
 spl_autoload_register(function ($class) 
 {
     $prefix = 'MyApp\\';
@@ -39,3 +44,4 @@ $controller->setView($view);
 $controller->$actionMethodName();
 
 $view->render();
+*/
