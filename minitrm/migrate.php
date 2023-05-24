@@ -23,6 +23,14 @@ spl_autoload_register(function ($class)
     }
 });
 
+use MyApp\Migrations\Test;
+
+$test = new Test();
+
 use MyApp\Migrations\Excercise;
 
-$test = new Excercise();
+$excesrsise = new Excercise();
+
+use MyApp\Migrations\Person;
+
+$person = new Excercise();
