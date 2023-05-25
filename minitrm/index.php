@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Test!!!
 <?php
+=======
+ivan ist coooool !!!!!!!
+
+
+<?php
+
+>>>>>>> 2b4dc2bae270d094133fb9ffd7c4f4ed76e9797b
 /*
 spl_autoload_register(function ($class) 
 {
@@ -41,4 +49,8 @@ $controller->setView($view);
 $controller->$actionMethodName();
 
 $view->render();
+<<<<<<< HEAD
 */
+=======
+*/
+>>>>>>> 2b4dc2bae270d094133fb9ffd7c4f4ed76e9797b
