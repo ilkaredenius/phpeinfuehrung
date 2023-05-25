@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <link rel="icon" href="logo.jpg">
+    <img src="logo.jpg">
     <div class="navbar">
         <a class="active" href="#">Home</a><br>
         <a href="#">Kontakt</a><br>
