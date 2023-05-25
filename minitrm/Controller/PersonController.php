@@ -32,7 +32,6 @@ class PersonController extends Controller implements ControllerInterface
         $vorname = "";
         $nachname = "";
         $person = new Person();
-        $person->debug();
         
         if (isset($this->vars['firstname'])) {
             $vorname = $this->vars['firstname'];
@@ -41,13 +40,15 @@ class PersonController extends Controller implements ControllerInterface
         if (isset($this->vars['lastname'])) {
             $nachname = $this->vars['lastname'];
         }
-
-        try {
-            $person->setVorname($vorname);
-            $person->setNachname($nachname);
-            $person->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        
+        if (isset($_POST['action'])) {
+            try {
+                $person->setVorname($vorname);
+                $person->setNachname($nachname);
+                $person->save();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     }
 

@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['action'])) {
+?>
+<h2>Das Training wurde angelegt.</h2>
+<?php
+} else {
+?>
 <h2>Training anlegen</h2>
 <form action="/minitrm/index.php?controller=training&action=traininganlegen" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="training">
@@ -65,4 +72,7 @@
         <input type="submit" value="speichern">
     </div>
 </form>
+<?php
+}
+?>
 <p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>

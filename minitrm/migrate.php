@@ -23,6 +23,6 @@ spl_autoload_register(function ($class)
     }
 });
 
-use MyApp\Migrations\Excercise;
+use MyApp\Migrations\Training;
 
-$test = new Excercise();
+$excercise = new Training();

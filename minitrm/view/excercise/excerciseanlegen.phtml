@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['action'])) {
+?>
+<h2>Die Excercise wurde angelegt.</h2>
+<?php
+} else {
+?>
 <h2>Excercise anlegen</h2>
 <form action="/minitrm/index.php?controller=excercise&action=excerciseanlegen" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="excercise">
@@ -5,8 +12,8 @@
     <div>
         <h3>
         Split, Part
-        </h3><?php //print_r($collection2); ?>
-        <select name="split">
+        </h3>
+        <select name="split" required="required">
             <option value="">--Bitte auswählen--</option>
         <?php
         foreach ($collection2 as $split) {
@@ -21,7 +28,7 @@
         <h3>
         User
         </h3>
-        <select name="user">
+        <select name="user" required="required">
             <option value="">--Bitte auswählen--</option>
         <?php
         foreach ($collection as $person) {
@@ -36,35 +43,38 @@
         <h3>
         Name
         </h3>
-        <input type="text" name="name">
+        <input type="text" name="name" required="required">
     </div>
     <div>
         <h3>
         Number
         </h3>
-        <input type="text" name="number">
+        <input type="text" name="number" required="required">
     </div>
     <div>
         <h3>
         Sets
         </h3>
-        <input type="text" name="sets">
+        <input type="text" name="sets" required="required">
     </div>
     <div>
         <h3>
         Reps
         </h3>
-        <input type="text" name="reps">
+        <input type="text" name="reps" required="required">
     </div>
     <div>
         <h3>
         Sequence
         </h3>
-        <input type="text" name="sequence">
+        <input type="text" name="sequence" required="required">
     </div>
     <br>
     <div id="speichern">
         <input type="submit" value="speichern">
     </div>
 </form>
+<?php
+}
+?>
 <p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>

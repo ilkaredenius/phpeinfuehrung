@@ -9,7 +9,7 @@ use MyApp\Model\Person;
 use MyApp\Model\Split;
 use MyApp\Controller\ControllerInterface;
 
-
+class Controller {}
 class ExcerciseController extends Controller implements ControllerInterface
 {
     protected $view;
@@ -97,8 +97,8 @@ class ExcerciseController extends Controller implements ControllerInterface
         } else {
             $sequence = $this->vars['sequence'];
         }
-
-        if ($alldataflag) {
+echo"1";
+        if ($alldataflag) {echo"2";
             try {
                 $excercise->setSplit_id($split_part_id);
                 $excercise->setUser_id($user_id);
@@ -120,8 +120,7 @@ class ExcerciseController extends Controller implements ControllerInterface
         $split = new Split();
         $person = new Person();
 
-        if (isset($this->vars['id']))
-            $id = $this->vars['id'];
+        $id = $this->vars['id'];
 
         $excerciseCollection = $excercise->findFirst($id);
 

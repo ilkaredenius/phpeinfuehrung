@@ -22,13 +22,13 @@ final class DB {
         try {
             //TODO notwendig?
             //TODO config files schreiben
-            $this->mysqli = new mysqli("localhost", "root", "", "trainingneu");
+            $this->mysqli = new mysqli("localhost", "root", "", "training");
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
 
         try {
-            $this->mysqli->select_db("trainingneu");
+            $this->mysqli->select_db("training");
         } catch (Exception $e) {
             echo $e->getMessage();
         }

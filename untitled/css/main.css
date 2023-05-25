@@ -1,0 +1,125 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: "Open sans";
+}
+footer {
+    text-align: right;
+    margin-top: 100px;
+    padding-top: 300px;
+    padding-right: 20px;
+    display: block;
+    clear: both;
+}
+.header {
+    display: block;
+}
+.article {
+    padding: 50px;
+}
+.section {
+    padding: 20px;
+}
+.oben {
+    text-align: center;
+    float: left;
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.urlaub {
+    width: 60%;
+    text-align: center;
+}
+.main {
+    width: 100%;
+}
+.bild {
+    margin-top: 100px;
+}
+.bildklein {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 110px;
+}
+.wohnung {
+    width: 40%;
+}
+.spalte1 {
+    float: left; width: 20%; margin-right: 2%; padding: 20px; background: #fff; box-sizing: border-box;
+    }
+.spalte2 {
+    float: left; width: 40%; margin-right: 2%; padding: 5px; background: #fff; box-sizing: border-box; text-align: center;
+}
+.spalte3 {
+    float: left; width: 3%; margin-right: 2%; padding: 35px; background: #fff; box-sizing: border-box;
+}
+.spalte4 {
+    float: left; width: 20%; margin-right: 2%; padding: 30px; background: #fff; box-sizing: border-box;
+}
+.spalte5 {
+    float: right; width: 5%; margin-right: 0; padding: 20px; background: #fff; box-sizing: border-box;
+}
+ul li.unten{
+    list-style: none;
+    display: inline;
+}
+.link {
+    clear: both;
+}
+.langertext {
+    width: 300px;
+}
+.kurzertext {
+    width: 50px;
+}
+.normaltext {
+    width: 243px;
+}
+.kontakt {
+    float: left;
+}
+/* open-sans-300 - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/open-sans-v34-latin_latin-ext-300.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/open-sans-v34-latin_latin-ext-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/open-sans-v34-latin_latin-ext-300.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-300.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-300.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/open-sans-v34-latin_latin-ext-300.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+  
+/* open-sans-regular - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/open-sans-v34-latin_latin-ext-regular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/open-sans-v34-latin_latin-ext-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/open-sans-v34-latin_latin-ext-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/open-sans-v34-latin_latin-ext-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+  
+/* open-sans-600 - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/open-sans-v34-latin_latin-ext-600.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/open-sans-v34-latin_latin-ext-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/open-sans-v34-latin_latin-ext-600.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-600.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/open-sans-v34-latin_latin-ext-600.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/open-sans-v34-latin_latin-ext-600.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+  

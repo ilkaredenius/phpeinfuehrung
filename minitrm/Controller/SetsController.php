@@ -31,7 +31,7 @@ class SetsController extends Controller implements ControllerInterface
     }
 
     public function setsAnlegenAction()
-    {var_dump($this->vars);
+    {
         if (isset($this->vars['user_id']))
             $user = $this->vars['user_id'];
         if (isset($this->vars['day']))
@@ -55,7 +55,7 @@ class SetsController extends Controller implements ControllerInterface
         }
 
         //Datenübergabe an die View person/index.phtml
-        $this->view->setData(["collection" => $excerciseCollection, "collection2" => $trainingCollection, "user" => $user]);
+        $this->view->setData(["collection" => $excerciseCollection, "collection2" => $trainingCollection, "user" => $user, "day" => $day]);
 
         $weight = 0;
         foreach ($this->vars as $key => $value) {

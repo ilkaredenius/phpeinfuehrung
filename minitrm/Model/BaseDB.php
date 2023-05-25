@@ -11,7 +11,7 @@ abstract class BaseDB {
         try {
             //TODO notwendig?
             //TODO config files schreiben
-            $mysqli = new mysqli("localhost", "root", "", "trainingneu");
+            $mysqli = new mysqli("localhost", "root", "", "training");
         } catch (Exception $ee) {
             echo $ee->getMessage();
         }
@@ -131,7 +131,7 @@ abstract class BaseDB {
             } catch (Exception $ee) {
                 echo $ee->getMessage();
             }
-        }
+        }var_dump($sql);
         $mysqli = DB::getInstance()->getConnect();
         $result = $mysqli->query($sql);
         return true;

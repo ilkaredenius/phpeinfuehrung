@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['action'])) {
+?>
+<h2>Das Set wurde angepasst.</h2>
+<?php
+} else {
+?>
 <h2>Set bearbeiten</h2>
 <form action="/minitrm/index.php?controller=sets&action=setsbearbeiten" name="neueexcercise" method="post">
     <input type="hidden" name="controller" value="sets">
@@ -82,4 +89,7 @@
         <input type="submit" value="speichern">
     </div>
 </form>
+<?php
+}
+?>
 <p><a href="index.php?controller=index&action=index">zur&uuml;ck</a></p>
